@@ -1,7 +1,7 @@
 # FaceDetector
 ## How it all begun?
-It all begun by just an enthusiasm, I've got excited when I saw "Face detection application with OpenCV library" title on suggested projects section of instruction of project of Principles of Software Design and Development course.
-And, I have to mention it's just a project of Principles of Software Design and Development course, but you are free to use it as well.
+It all begun by just an enthusiasm, we've got excited when we saw "Face detection application with OpenCV library" title on suggested projects section of instruction of project of Principles of Software Design and Development course.
+And, we have to mention it's just a project of Principles of Software Design and Development course, but you are free to use it as well.
 ## Usage of the program
 You have 2 options in here, either you download the source code and build .JAR file to use the program wherever you want or just simply download the final release of the program.
 The rest is just the same as below, usage of the program is too easy.
