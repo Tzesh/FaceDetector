@@ -1,6 +1,8 @@
 package edu.estu.gui;
 
 import edu.estu.FaceDetector;
+
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,6 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Interface extends javax.swing.JFrame {
     FaceDetector faceDetector = new FaceDetector();
     String imagePath;
+    String imagesPath;
     int pos = 0;
 
     public Interface() {
@@ -29,6 +32,7 @@ public class Interface extends javax.swing.JFrame {
         selectButton.setEnabled(true);
         previousButton.setEnabled(false);
         nextButton.setEnabled(false);
+        browseButton.setEnabled(false);
         TextAreaOutputStream taos = new TextAreaOutputStream(console, 60);
         PrintStream ps = new PrintStream(taos);
         System.setOut(ps);
@@ -54,12 +58,12 @@ public class Interface extends javax.swing.JFrame {
         face = new javax.swing.JLabel();
         previousButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
+        browseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(720, 480));
         setMinimumSize(new java.awt.Dimension(720, 480));
         setName("GUI"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(720, 480));
         setResizable(false);
         setSize(new java.awt.Dimension(720, 480));
 
@@ -107,57 +111,70 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        browseButton.setText("Browse");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(selectButton)
-                                .addGap(35, 35, 35)
-                                .addComponent(processButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(displayButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(face, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(previousButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nextButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(resultImage, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(selectButton)
+                                                                                .addGap(35, 35, 35)
+                                                                                .addComponent(processButton)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                                .addComponent(displayButton))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(previousButton)
+                                                                                .addGap(26, 26, 26)
+                                                                                .addComponent(browseButton)
+                                                                                .addGap(26, 26, 26)
+                                                                                .addComponent(nextButton)
+                                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(32, 32, 32)
+                                                                .addComponent(face, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addComponent(resultImage, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultImage, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(processButton)
-                            .addComponent(displayButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(face, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nextButton)
-                            .addComponent(previousButton))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel1)
+                                .addGap(1, 1, 1)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(resultImage, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(selectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(processButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(displayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(face, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(previousButton)
+                                                        .addComponent(browseButton)
+                                                        .addComponent(nextButton))))
+                                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,7 +184,7 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             faceDetector.detectAndDisplay(imagePath);
-        } catch (URISyntaxException e) {
+        } catch (IOException e) {
             System.out.println("An unknown error has occurred during the process.");
         }
         processButton.setEnabled(false);
@@ -193,37 +210,47 @@ public class Interface extends javax.swing.JFrame {
 
     private void displayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
 
-            // TODO add your handling code here:
-            selectButton.setEnabled(true);
-            displayButton.setEnabled(false);
-            ImageIcon icon = new ImageIcon("image_out.png");
-            Image image = icon.getImage().getScaledInstance(resultImage.getWidth(), resultImage.getHeight(), Image.SCALE_SMOOTH);
-            resultImage.setIcon(new ImageIcon(image));
-            if (getImages().size() == 0) return;
-            previousButton.setEnabled(true);
-            nextButton.setEnabled(true);
-            showImage(0);
-            
+        // TODO add your handling code here:
+        selectButton.setEnabled(true);
+        displayButton.setEnabled(false);
+        ImageIcon icon = new ImageIcon("image_out.png");
+        Image image = icon.getImage().getScaledInstance(resultImage.getWidth(), resultImage.getHeight(), Image.SCALE_SMOOTH);
+        resultImage.setIcon(new ImageIcon(image));
+        if (getImages().size() == 0) return;
+        previousButton.setEnabled(true);
+        nextButton.setEnabled(true);
+        browseButton.setEnabled(true);
+        showImage(0);
+
     }//GEN-LAST:event_displayButtonActionPerformed
 
     private void previousButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousButtonActionPerformed
         // TODO add your handling code here:
         pos = pos - 1;
-       if(pos < 0) pos = 0;
-       showImage(pos);
+        if (pos < 0) pos = 0;
+        showImage(pos);
     }//GEN-LAST:event_previousButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
         pos = pos + 1;
-       if(pos >= getImages().size()) pos  = getImages().size() - 1;
-       showImage(pos);
+        if (pos >= getImages().size()) pos = getImages().size() - 1;
+        showImage(pos);
     }//GEN-LAST:event_nextButtonActionPerformed
 
-    
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            Desktop.getDesktop().open(faceDetector.getTempDir());
+        } catch (IOException ex) {
+            System.out.println("An unknown error has occurred during the browse operation.");
+        }
+    }//GEN-LAST:event_browseButtonActionPerformed
+
+
     public void showImage(int index) {
         pos = index;
-        
+
         List<String> imagesList = getImages();
 
         String imageName = imagesList.get(index);
@@ -234,10 +261,11 @@ public class Interface extends javax.swing.JFrame {
 
         face.setIcon(new ImageIcon(image));
     }
-    
+
     private List getImages() {
         return faceDetector.getImageNames();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -245,7 +273,7 @@ public class Interface extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -275,6 +303,7 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton browseButton;
     private javax.swing.JTextArea console;
     private javax.swing.JButton displayButton;
     private javax.swing.JLabel face;
