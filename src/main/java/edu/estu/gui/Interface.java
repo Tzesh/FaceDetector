@@ -213,7 +213,7 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         selectButton.setEnabled(true);
         displayButton.setEnabled(false);
-        ImageIcon icon = new ImageIcon("image_out.png");
+        ImageIcon icon = new ImageIcon(faceDetector.getResultImage());
         Image image = icon.getImage().getScaledInstance(resultImage.getWidth(), resultImage.getHeight(), Image.SCALE_SMOOTH);
         resultImage.setIcon(new ImageIcon(image));
         if (getImages().size() == 0) return;

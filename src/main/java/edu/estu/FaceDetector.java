@@ -16,6 +16,7 @@ import java.util.List;
 public class FaceDetector {
     List<String> imageNames = null;
     File tempDir;
+    String resultImage = null;
 
     public void detectAndDisplay(String pathName) throws IOException {
         imageNames = new LinkedList<>();
@@ -51,6 +52,7 @@ public class FaceDetector {
         }
         File imageFile = File.createTempFile("image", ".png", tempDir.toFile());
         imageFile.deleteOnExit();
+        this.resultImage = imageFile.getAbsolutePath();
         Imgcodecs.imwrite(imageFile.getAbsolutePath(), src);
         System.out.println("Face detection process has done.\n"
                 + "All the faces and image are below, you can traversal between faces and browse all the images by pressing 'Browse' button below.");
@@ -88,5 +90,9 @@ public class FaceDetector {
 
     public File getTempDir() {
         return tempDir;
+    }
+
+    public String getResultImage() {
+        return resultImage;
     }
 }
