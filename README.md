@@ -1,5 +1,5 @@
 # FaceDetector
-## How it all begun?
+## How did it all begin?
 It all begun by just an enthusiasm, we've got excited when we saw "Face detection application with OpenCV library" title on suggested projects section of instruction of project of Principles of Software Design and Development course.
 And, I have to mention it's just a project of Principles of Software Design and Development course, but you are free to use it as well.
 ## Usage of the program
