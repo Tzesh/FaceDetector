@@ -190,6 +190,7 @@ public class Interface extends javax.swing.JFrame {
         processButton.setEnabled(false);
         displayButton.setEnabled(true);
         System.out.println("Image processed, you can display faces as you wish.");
+        selectButton.setEnabled(true);
     }//GEN-LAST:event_processButtonActionPerformed
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
@@ -211,7 +212,6 @@ public class Interface extends javax.swing.JFrame {
     private void displayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
 
         // TODO add your handling code here:
-        selectButton.setEnabled(true);
         displayButton.setEnabled(false);
         ImageIcon icon = new ImageIcon(faceDetector.getResultImage());
         Image image = icon.getImage().getScaledInstance(resultImage.getWidth(), resultImage.getHeight(), Image.SCALE_SMOOTH);
