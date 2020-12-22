@@ -10,8 +10,5 @@
         <module name="FaceDetection" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="FaceDetection" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
