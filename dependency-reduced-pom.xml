@@ -5,7 +5,7 @@
   <artifactId>FaceDetectionApplication</artifactId>
   <version>1.0</version>
   <build>
-    <finalName>FaceDetection</finalName>
+    <finalName>FaceDetector</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

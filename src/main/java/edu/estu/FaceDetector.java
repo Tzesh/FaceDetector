@@ -16,7 +16,7 @@ public class FaceDetector {
     File tempDir; // temporary direction to save, show and browse images
     String resultImage = null; // result image means, the original image with faces framed
 
-    public void detectAndDisplay(String pathName) throws IOException {
+    public void detectAndSave(String pathName) throws IOException {
         imageNames = new LinkedList<>(); // imageNames have to be saved as LinkedList
         nu.pattern.OpenCV.loadLocally(); // before using OpenCV make sure that it's loaded
         Mat src = Imgcodecs.imread(pathName); // getting the image according to the given path from Interface

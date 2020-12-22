@@ -176,7 +176,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void processButtonActionPerformed(java.awt.event.ActionEvent evt) { // detecting faces
         try {
-            faceDetector.detectAndDisplay(imagePath); // calling detectAndDisplay method in FaceDetector class
+            faceDetector.detectAndSave(imagePath); // calling detectAndDisplay method in FaceDetector class
         } catch (IOException e) {
             System.out.println("An unknown error has occurred during the process.");
         }
