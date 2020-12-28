@@ -1,4 +1,4 @@
-package edu.estu;
+package edu.eskisehir;
 
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;

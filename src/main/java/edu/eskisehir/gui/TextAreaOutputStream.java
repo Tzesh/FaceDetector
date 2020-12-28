@@ -1,4 +1,4 @@
-package edu.estu.gui;
+package edu.eskisehir.gui;
 
 import javax.swing.*;
 import java.awt.*;

@@ -28,7 +28,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>edu.estu.gui.Interface</mainClass>
+                  <mainClass>edu.eskisehir.gui.Interface</mainClass>
                 </transformer>
               </transformers>
             </configuration>
